@@ -54,6 +54,7 @@ changePlatformNames(){
         firstLine := element.line[1]
         StringTrimLeft, lineWPlatfNameDel, firstLine, %oldPlatformNameCount%
         recreatedLine := newPlatform lineWPlatfNameDel
+        element.line[1] := recreatedLine
     }
 }
 
