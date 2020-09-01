@@ -8,6 +8,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 inputFolder := "C:\trackerConverterInput"
 game := {}
+newPlatform := "PokerStars", oldPlatformNameCount := 5    ;;Can be changed if need to change from/inot different names
 
 
 \::
@@ -17,7 +18,8 @@ game := {}
         inputString := input(fileDir)
 
         splitTextIntoObjects(inputString)
-        splitFullStringIntoLinesAndPutIntoArray()
+        splitFullStringsIntoLinesAndPutIntoArray()
+        changePlatformNames()
     }
 return
 
@@ -38,11 +40,20 @@ splitTextIntoObjects(inputString){
     }
 }
 
-splitFullStringIntoLinesAndPutIntoArray(){
+splitFullStringsIntoLinesAndPutIntoArray(){
     global game
     for i, element in game{
         line := StrSplit(element.fullString, "`n")
         element.line := line
+    }
+}
+
+changePlatformNames(){
+    global game, newPlatform, oldPlatformNameCount
+    for i, element in game{
+        firstLine := element.line[1]
+        StringTrimLeft, lineWPlatfNameDel, firstLine, %oldPlatformNameCount%
+        recreatedLine := newPlatform lineWPlatfNameDel
     }
 }
 
