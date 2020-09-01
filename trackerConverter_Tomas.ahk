@@ -26,7 +26,9 @@ game := {}
 
         makeNewFullStringsForObjects()
 
-        makeNewTxtFileString()
+        newTxtText := makeNewTxtFileString()
+
+        rewriteFile(fileDir, newTxtText)
     }
 return
 
@@ -126,4 +128,9 @@ makeNewTxtFileString(){
     }
     StringTrimLeft, newTxtString, newTxtString, 2
     return newTxtString
+}
+
+rewriteFile(fileDir, newText){
+    FileDelete, %fileDir%
+    FileAppend, %newText%, %fileDir%
 }
