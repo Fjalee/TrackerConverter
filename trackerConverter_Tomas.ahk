@@ -16,8 +16,12 @@ game := {}
         inputString := input(fileDir)
 
         splitTextIntoObjects(inputString)
+        game.Pop()
+
         splitFullStringsIntoLinesAndPutIntoArray()
+
         changeFirstLine()
+        
         deleteUnwantedDealtLines()
     }
 return
@@ -78,6 +82,7 @@ removeAllDealtLinesButHero(game, indexHoleCardLine){
 
     i := 10
     while (i > 1){
+        j++
         i--
         elIndex := indexHoleCardLine+i
         line := game.line[elIndex]
