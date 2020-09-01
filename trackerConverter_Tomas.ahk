@@ -25,6 +25,8 @@ game := {}
         deleteUnwantedDealtLines()
 
         makeNewFullStringsForObjects()
+
+        makeNewTxtFileString()
     }
 return
 
@@ -116,3 +118,12 @@ makeNewFullStringsForObjects(){
     }
 }
 
+makeNewTxtFileString(){
+    global game
+    newTxtString := ""
+    for i, element in game{
+        newTxtString := newTxtString "`n`n" element.newFullString
+    }
+    StringTrimLeft, newTxtString, newTxtString, 2
+    return newTxtString
+}
