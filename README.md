@@ -7,11 +7,11 @@ Poker tracker txt file converter to another plaftorm
 # How to use
 ------------------------------------------------------
 ### HotKeys
-\ - Run
-Esc - Exit
+\ - Run  
+Esc - Exit  
+  
+### Setup  
+- Press \, if input directory is not created, the script will create it  
 
-### Setup
-- Press \, if input directory is not created, the script will create it
-
-### Run
-- Put .txt files for conversion into created directory
+### Run  
+- Put .txt files for conversion into created directory  
