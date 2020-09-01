@@ -17,6 +17,7 @@ game := {}
         inputString := input(fileDir)
 
         splitTextIntoObjects(inputString)
+        splitFullStringIntoLinesAndPutIntoArray()
     }
 return
 
@@ -28,12 +29,20 @@ input(fileDir){
 splitTextIntoObjects(inputString){
     global game
 
-    newStringTtemp := StrSplit(inputString, "`n`r`n`r`n")
+    gamesFullStringsArray := StrSplit(inputString, "`n`r`n`r`n")
     
-    for i, element in newStringTtemp{
+    for i, element in gamesFullStringsArray{
         gameObject := {}
         gameObject.fullString := element
         game.Push(gameObject)
+    }
+}
+
+splitFullStringIntoLinesAndPutIntoArray(){
+    global game
+    for i, element in game{
+        line := StrSplit(element.fullString, "`n")
+        element.line := line
     }
 }
 
