@@ -21,8 +21,10 @@ game := {}
         splitFullStringsIntoLinesAndPutIntoArray()
 
         changeFirstLine()
-        
+
         deleteUnwantedDealtLines()
+
+        makeNewFullStringsForObjects()
     }
 return
 
@@ -100,5 +102,17 @@ removeAllDealtLinesButHero(game, indexHoleCardLine){
 
     if (amountOfDealt-1 != amountOfOpponentsDealt)
         MsgBox, Error func removeAllDealtLinesButHero
+}
+
+makeNewFullStringsForObjects(){
+    global game
+    for i, element in game{
+        newString := ""
+        for j, line in element.line{
+            newString := newString "`n" line
+        }
+        StringTrimLeft, newString, newString, 1
+        element.newFullString := newString
+    }
 }
 
