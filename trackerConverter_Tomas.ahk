@@ -60,28 +60,30 @@ changeFirstLine(){
 deleteUnwantedDealtLines(){
     global game
     for i, elementI in game{
-        for j, elementJ in elementI.line{
-            stopped := 0
-            if (elementJ = "*** HOLE CARDS ***"){
-                stopped := 1
-                break
-            }
+        indexHoleCardLine := getIndexHoldeCardLine(elementI)
+        removeAllDealtLinesButHero(elementI, indexHoleCardLine)
+    }
+}
+getIndexHoldeCardLine(thisGame){
+    for i, element in thisGame.line{
+        if (element = "*** HOLE CARDS ***"){
+            return i
         }
-        if (!stopped)
-            MsgBox, Error func deleteUnwantedDealtLine()
-
-        k := 10
-        while (k > 1){
-            k--
-            elIndex := j+k
-            line := elementI.line[elIndex]
-            
-            IfInString, line, Dealt to 
+    }
+    MsgBox, Error func getIndexHoldeCardLine()
+}
+removeAllDealtLinesButHero(game, indexHoleCardLine){
+    i := 10
+    while (i > 1){
+        i--
+        elIndex := indexHoleCardLine+i
+        line := game.line[elIndex]
+        
+        IfInString, line, Dealt to 
+        {
+            IfNotInString, line, Dealt to Hero
             {
-                IfNotInString, line, Dealt to Hero
-                {
-                    elementI.line.RemoveAt(elIndex)
-                }
+                game.line.RemoveAt(elIndex)
             }
         }
     }
