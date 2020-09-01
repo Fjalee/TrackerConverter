@@ -8,8 +8,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 inputFolder := "C:\trackerConverterInput"
 game := {}
-newPlatform := "PokerStars", oldPlatformNameCount := 5    ;;Can be changed if need to change from/inot different names
-
 
 \::
     Loop Files, %inputFolder%\*.txt
@@ -19,7 +17,7 @@ newPlatform := "PokerStars", oldPlatformNameCount := 5    ;;Can be changed if ne
 
         splitTextIntoObjects(inputString)
         splitFullStringsIntoLinesAndPutIntoArray()
-        changePlatformNames()
+        changeFirstLine()
     }
 return
 
@@ -48,12 +46,12 @@ splitFullStringsIntoLinesAndPutIntoArray(){
     }
 }
 
-changePlatformNames(){
-    global game, newPlatform, oldPlatformNameCount
+changeFirstLine(){
+    global game
     for i, element in game{
         firstLine := element.line[1]
-        StringTrimLeft, lineWPlatfNameDel, firstLine, %oldPlatformNameCount%
-        recreatedLine := newPlatform lineWPlatfNameDel
+        StringTrimLeft, lineWPlatfNameDel, firstLine, 14
+        recreatedLine := "PokerStars Hand #" lineWPlatfNameDel
         element.line[1] := recreatedLine
     }
 }
