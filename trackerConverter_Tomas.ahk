@@ -10,6 +10,8 @@ inputFolder := "C:\trackerConverterInput"
 game := {}
 
 \::
+    createInputFolderIfNotExists(inputFolder)
+
     Loop Files, %inputFolder%\*.txt
     {
         fileDir = %inputFolder%\%A_LoopFileName%
@@ -31,6 +33,18 @@ game := {}
         rewriteFile(fileDir, newTxtText)
     }
 return
+
+ESC::
+	ExitApp
+return
+
+createInputFolderIfNotExists(fileDir){
+    if !FileExist(fileDir){
+        FileCreateDir, %fileDir%
+        MsgBox, created directory %fileDir%`n`nEXITING SCRIPT
+        ExitApp
+    }
+}
 
 input(fileDir){
     FileRead, inputString, %fileDir%
