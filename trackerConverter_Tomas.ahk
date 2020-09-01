@@ -18,6 +18,7 @@ game := {}
         splitTextIntoObjects(inputString)
         splitFullStringsIntoLinesAndPutIntoArray()
         changeFirstLine()
+        deleteUnwantedDealtLines()
     }
 return
 
@@ -53,6 +54,36 @@ changeFirstLine(){
         StringTrimLeft, lineWPlatfNameDel, firstLine, 14
         recreatedLine := "PokerStars Hand #" lineWPlatfNameDel
         element.line[1] := recreatedLine
+    }
+}
+
+deleteUnwantedDealtLines(){
+    global game
+    for i, elementI in game{
+        for j, elementJ in elementI.line{
+            stopped := 0
+            if (elementJ = "*** HOLE CARDS ***"){
+                stopped := 1
+                break
+            }
+        }
+        if (!stopped)
+            MsgBox, Error func deleteUnwantedDealtLine()
+
+        k := 10
+        while (k > 1){
+            k--
+            elIndex := j+k
+            line := elementI.line[elIndex]
+            
+            IfInString, line, Dealt to 
+            {
+                IfNotInString, line, Dealt to Hero
+                {
+                    elementI.line.RemoveAt(elIndex)
+                }
+            }
+        }
     }
 }
 
