@@ -70,22 +70,30 @@ getIndexHoldeCardLine(thisGame){
             return i
         }
     }
-    MsgBox, Error func getIndexHoldeCardLine()
+    MsgBox, Error func getIndexHoldeCardLine
 }
 removeAllDealtLinesButHero(game, indexHoleCardLine){
+    amountOfDealt := 0  ;For error
+    amountOfOpponentsDealt := 0 ;For error
+
     i := 10
     while (i > 1){
         i--
         elIndex := indexHoleCardLine+i
         line := game.line[elIndex]
-        
+
         IfInString, line, Dealt to 
         {
+            amountOfDealt++
             IfNotInString, line, Dealt to Hero
             {
+                amountOfOpponentsDealt++
                 game.line.RemoveAt(elIndex)
             }
         }
     }
+
+    if (amountOfDealt-1 != amountOfOpponentsDealt)
+        MsgBox, Error func removeAllDealtLinesButHero
 }
 
