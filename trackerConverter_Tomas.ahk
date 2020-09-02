@@ -28,6 +28,8 @@ game := {}
 
         deleteUnwantedDealtLines()
 
+        getShowsCounts()
+
         makeNewFullStringsForObjects()
 
         newTxtText := makeNewTxtFileString()
@@ -163,4 +165,20 @@ makeNewTxtFileString(){
 rewriteFile(fileDir, newText){
     FileDelete, %fileDir%
     FileAppend, %newText%, %fileDir%
+}
+
+getShowsCounts(){
+    global game
+    for i, element in game{
+        showsCount := 0
+        for j, line in element.line{
+            IfInString, line, shows
+            {
+                showsCount++
+                showsStringWithSymbols := ": shows ["
+                IfNotInString, line, %showsStringWithSymbols%
+                    MsgBox, Error func getShowsCounts line:`n%line%
+            }
+        }
+    }
 }
