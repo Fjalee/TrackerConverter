@@ -28,7 +28,7 @@ game := {}
 
         deleteUnwantedDealtLines()
 
-        getShowsCounts()
+        initiateShowsCounts()
 
         makeNewFullStringsForObjects()
 
@@ -167,7 +167,7 @@ rewriteFile(fileDir, newText){
     FileAppend, %newText%, %fileDir%
 }
 
-getShowsCounts(){
+initiateShowsCounts(){
     global game
     for i, element in game{
         showsCount := 0
@@ -180,5 +180,6 @@ getShowsCounts(){
                     MsgBox, Error func getShowsCounts line:`n%line%
             }
         }
+        game[i].showsCount := showsCount
     }
 }
