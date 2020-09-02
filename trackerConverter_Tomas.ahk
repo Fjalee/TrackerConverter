@@ -66,7 +66,7 @@ splitTextIntoObjects(inputString){
         game.Push(gameObject)
     }
 
-    if (gamesFullStringsArray.Length <= 1){
+    if (gamesFullStringsArray.Length() <= 1){
         MsgBox, Error func splitTextIntoObjects, no double newline found`nEXITING SCRIPT
         ExitApp
     }
@@ -84,11 +84,17 @@ changeFirstLine(){
     global game
     for i, element in game{
         firstLine := element.line[1]
+
+        firstLineName := SubStr(firstLine, 1, 14)
+        if (firstLineName != "Poker Hand #HD"){
+            MsgBox, Error func changeFirstLine, first line doesnt contain "Poker Hand #HD", first 14 chars are "%firstLineName%"`nEXITING SCRIPT
+            ExitApp
+        }
+
         StringTrimLeft, lineWPlatfNameDel, firstLine, 14
         recreatedLine := "PokerStars Hand #" lineWPlatfNameDel
         element.line[1] := recreatedLine
     }
-    test()
 }
 
 deleteUnwantedDealtLines(){
