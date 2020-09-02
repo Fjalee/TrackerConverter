@@ -213,8 +213,6 @@ deleteShowDownIfNotEnaughShowsAndChangeShowdownFormat(){
     }
 }
 
-;fix FIRST SHOWDOWN
-
 checkWhichKindNewLine(inputString){
     nrFound := 0
     nFound := 0
