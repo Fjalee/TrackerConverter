@@ -14,6 +14,8 @@ game := {}
 
     Loop Files, %inputFolder%\*.txt
     {
+        game := {}
+
         fileDir = %inputFolder%\%A_LoopFileName%
         inputString := input(fileDir)
 
