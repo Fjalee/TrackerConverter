@@ -11,6 +11,7 @@ game := {}
     times := 0
     createInputFolderIfNotExists(inputFolder)
 
+    MsgBox, After pressing OK the conversion will begin...
     Loop Files, %inputFolder%\*.txt
     {
         times++
