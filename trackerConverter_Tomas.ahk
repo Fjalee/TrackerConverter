@@ -14,15 +14,21 @@ game := {}
     MsgBox, After pressing OK the conversion will begin...
     Loop Files, %inputFolder%\*.txt
     {
+        showDownsCount := 0
         times++
         game := {}
 
         fileDir = %inputFolder%\%A_LoopFileName%
         inputString := input(fileDir)
+        inputString := changeShowDowns(inputString, showDownsCount)
+
         newLineKind := checkWhichKindNewLine(inputString)
 
         splitTextIntoObjects(inputString, newLineKind)
         game.Pop()
+        amountOfGames := game.Length()
+        if (amountOfGames > showDownsCount)
+            MsgBox, Error amountOfGames > showDownsCount
 
         splitFullStringsIntoLinesAndPutIntoArray()
 
@@ -192,8 +198,9 @@ deleteShowDownIfNotEnaughShowsAndChangeShowdownFormat(){
     for i, element in game{
         showDownChanged := 0
         for j, line in element.line{
-            if (line = "*** SHOWDOWN ***"){
-                element.line[j] := "*** SHOW DOWN ***"
+            showDown := "SHOW DOWN"
+            IfInString, line, %showDown%
+            {
                 showDownChanged := 1
                 if (element.showsCount < 2){
                     element.line.RemoveAt(j)
@@ -226,4 +233,9 @@ checkWhichKindNewLine(inputString){
         return "`n`n`n"
     else if (!nFound && !nrFound)
         MsgBox, Error func checkWhichKindNewLine, Cant find double newline
+}
+
+changeShowDowns(inputString, ByRef count){
+    inputString := StrReplace(inputString, "SHOWDOWN", "SHOW DOWN", count)
+    return inputString
 }
