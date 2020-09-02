@@ -29,6 +29,7 @@ game := {}
         deleteUnwantedDealtLines()
 
         initiateShowsCounts()
+        deleteShowDownIfNotEnaughShows()
 
         makeNewFullStringsForObjects()
 
@@ -181,5 +182,24 @@ initiateShowsCounts(){
             }
         }
         game[i].showsCount := showsCount
+    }
+}
+
+deleteShowDownIfNotEnaughShows(){
+    global game
+    for i, element in game{
+        if (element.showsCount < 2){
+            showDownRemoved := 0
+            for j, line in element.line{
+                if (line = "*** SHOWDOWN ***"){
+                    zz:=0
+                    element.line.RemoveAt(j)
+                    showDownRemoved := 1
+                    break
+                }
+            }
+            if (showDownRemoved = 0)
+                MsgBox, Error func deleteShowDownIfNotEnaughShows cant find SHOWDOWN
+        }
     }
 }
