@@ -19,8 +19,9 @@ game := {}
 
         fileDir = %inputFolder%\%A_LoopFileName%
         inputString := input(fileDir)
+        newLineKind := checkWhichKindNewLine(inputString)
 
-        splitTextIntoObjects(inputString)
+        splitTextIntoObjects(inputString, newLineKind)
         game.Pop()
 
         splitFullStringsIntoLinesAndPutIntoArray()
@@ -59,10 +60,10 @@ input(fileDir){
     return inputString
 }
 
-splitTextIntoObjects(inputString){
+splitTextIntoObjects(inputString, newLineKind){
     global game
 
-    gamesFullStringsArray := StrSplit(inputString, "`n`r`n`r`n")
+    gamesFullStringsArray := StrSplit(inputString, newLineKind)
     
     for i, element in gamesFullStringsArray{
         gameObject := {}
@@ -203,4 +204,24 @@ deleteShowDownIfNotEnaughShows(){
                 MsgBox, Error func deleteShowDownIfNotEnaughShows cant find SHOWDOWN
         }
     }
+}
+
+checkWhichKindNewLine(inputString){
+    nrFound := 0
+    nFound := 0
+    nr := "`n`r`n`r`n"
+    n := "`n`n`n"
+    IfInString, inputString, %nr%
+        nrFound := 1
+    IfInString, inputString, %n%
+        nFound := 1
+
+    if (nrFound && nFound)
+        MsgBox, Error func checkWhichKindNewLine, both kind of newlines
+    else if (nrFound)
+        return "`n`r`n`r`n"
+    else if (nFound)
+        return "`n`n`n"
+    else if (!nFound && !nrFound)
+        MsgBox, Error func checkWhichKindNewLine, Cant find double newline
 }
