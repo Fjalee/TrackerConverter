@@ -33,7 +33,9 @@ game := {}
         newTxtText := makeNewTxtFileString()
 
         rewriteFile(fileDir, newTxtText)
+
     }
+    MsgBox, Conversion is done in`n%fileDir%
 return
 
 ESC::
