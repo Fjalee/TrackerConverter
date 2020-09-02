@@ -4,8 +4,6 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 
-;TODO reset vars for new file
-
 inputFolder := "C:\trackerConverterInput"
 game := {}, times := 0
 
