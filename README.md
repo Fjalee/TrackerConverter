@@ -15,3 +15,6 @@ Esc - Exit
 
 ### Run  
 - Put .txt files for conversion into created directory  
+
+### WARNING
+- If error occurred press ESC button to exit script
