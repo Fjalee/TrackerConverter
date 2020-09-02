@@ -7,13 +7,14 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;TODO reset vars for new file
 
 inputFolder := "C:\trackerConverterInput"
-game := {}
+game := {}, times := 0
 
 \::
     createInputFolderIfNotExists(inputFolder)
 
     Loop Files, %inputFolder%\*.txt
     {
+        times++
         game := {}
 
         fileDir = %inputFolder%\%A_LoopFileName%
@@ -35,7 +36,7 @@ game := {}
         rewriteFile(fileDir, newTxtText)
 
     }
-    MsgBox, Conversion is done in`n%fileDir%
+    MsgBox, Converted %times% files in`n%inputFolder%
 return
 
 ESC::
