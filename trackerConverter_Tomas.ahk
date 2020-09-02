@@ -65,6 +65,11 @@ splitTextIntoObjects(inputString){
         gameObject.fullString := element
         game.Push(gameObject)
     }
+
+    if (gamesFullStringsArray.Length <= 1){
+        MsgBox, Error func splitTextIntoObjects, no double newline found`nEXITING SCRIPT
+        ExitApp
+    }
 }
 
 splitFullStringsIntoLinesAndPutIntoArray(){
@@ -83,6 +88,7 @@ changeFirstLine(){
         recreatedLine := "PokerStars Hand #" lineWPlatfNameDel
         element.line[1] := recreatedLine
     }
+    test()
 }
 
 deleteUnwantedDealtLines(){
@@ -151,4 +157,13 @@ makeNewTxtFileString(){
 rewriteFile(fileDir, newText){
     FileDelete, %fileDir%
     FileAppend, %newText%, %fileDir%
+}
+
+test(){
+    global game
+    string := ""
+    for i, element in game[1].line{
+        string = %string% `n %element%
+    }
+    MsgBox, %string%
 }
