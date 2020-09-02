@@ -164,12 +164,3 @@ rewriteFile(fileDir, newText){
     FileDelete, %fileDir%
     FileAppend, %newText%, %fileDir%
 }
-
-test(){
-    global game
-    string := ""
-    for i, element in game[1].line{
-        string = %string% `n %element%
-    }
-    MsgBox, %string%
-}
