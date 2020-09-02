@@ -190,21 +190,23 @@ initiateShowsCounts(){
 deleteShowDownIfNotEnaughShowsAndChangeShowdownFormat(){
     global game
     for i, element in game{
-        showDownRemoved := 0
+        showDownChanged := 0
         for j, line in element.line{
             if (line = "*** SHOWDOWN ***"){
                 element.line[j] := "*** SHOW DOWN ***"
+                showDownChanged := 1
                 if (element.showsCount < 2){
                     element.line.RemoveAt(j)
-                    showDownRemoved := 1
                     break
                 }
             }
         }
-        if (showDownRemoved = 0)
+        if (showDownChanged = 0)
             MsgBox, Error func deleteShowDownIfNotEnaughShows cant find SHOWDOWN
     }
 }
+
+;fix FIRST SHOWDOWN
 
 checkWhichKindNewLine(inputString){
     nrFound := 0
