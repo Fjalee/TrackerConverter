@@ -5,9 +5,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 
 inputFolder := "C:\trackerConverterInput"
-game := {}, times := 0
+game := {}
 
 \::
+    times := 0
     createInputFolderIfNotExists(inputFolder)
 
     Loop Files, %inputFolder%\*.txt
