@@ -26,7 +26,7 @@ game := {}
 
         splitTextIntoObjects(inputString, newLineKind)
         lastItem := game.Pop()
-        if (lastItem != "")
+        if (lastItem.fullString != "")
             MsgBox, Error in main, last item isnt blank
         amountOfGames := game.Length()
         if (amountOfGames > showDownsCount)
