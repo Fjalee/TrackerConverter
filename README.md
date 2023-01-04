@@ -1,4 +1,4 @@
-# trackerConverter_Tomas_project
+# TrackerConverter
 
 # About
 ------------------------------------------------------
